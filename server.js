@@ -31,4 +31,41 @@ db.once("open", () => {
 
 app.get("/", (req, res) => {
 	res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/api", (req, res) => {
+
+	Article.find({}).sort(["date", "descending"]).limit(5).exec((err, doc) => {
+		if(err){
+			throw err;
+			console.log(err);
+		} else {
+			res.json(doc);
+		}
+	});
+});
+
+app.post("/api", (req, res) => {
+	let title = req.body.title;
+	let url = req.body.url;
+	let date = req.body.date;
+
+	let article = {title, date, url};
+
+	Article.update({$and: [{title: title}, {url: url}]},{$setOnInsert: article}, {upsert: true}, (err, doc) => {
+    if(err){
+    	throw err;
+    	console.log(err);
+    } else {
+    	res.json(doc);
+    }
+   
+  });
+});
+
+app.delete("/api/:id", (req, res) => {
+	let id = mongoose.Types.ObjectId(req.params.id);
+  Article.findByIdAndRemove(id, (err, doc) => {
+    res.send(doc);
+  })
 })
