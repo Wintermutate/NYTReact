@@ -1,15 +1,14 @@
 // Include React 
 import React from "react";
-
 // Here we include all of the sub-components
 import Form from './Children/Form';
 // Helper Function
 import helpers from './utils/helpers.js';
 
 // This is the main component. 
-export default class Main extends React.Component{
-	constructor(props){
-		super(props);
+class Main extends React.Component{
+	constructor(){
+		super();
 		this.state = {
 			searchTerm: "",
 			startYear: 0,
@@ -55,8 +54,8 @@ export default class Main extends React.Component{
 		this.setState({
 			searchTerm: term,
 			startYear: startYear,
-			endYear: endYear,
-		})
+			endYear: endYear
+		});
 	}
 
 	// If the component updates we'll run this code
@@ -80,22 +79,18 @@ export default class Main extends React.Component{
 		}
 
 	}
-   // On load display the number of clicks
-  	componentDidMount() {
+ 
+  	componentDidMount(){
     console.log("COMPONENT MOUNTED");
 
-	    // The moment the page renders on page load, we will retrieve the previous click count.
-	    // We will then utilize that click count to change the value of the click state.
 	    helpers.getHistory()
 	      .then((response)=> {
-	        // Using a ternary operator we can set newClicks to the number of clicks in our response object
-	        // If we don't have any clicks in our database, set newClicks to 0
 	        this.setState({
 	          history: response.data
 	        });
 	        console.log("RESULTS", response);
 	      });
-  }
+  	}
 
 	// Here we render the function
 	render(){
@@ -123,3 +118,4 @@ export default class Main extends React.Component{
 		)
 	}
 }
+module.exports = Main;

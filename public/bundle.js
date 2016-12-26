@@ -21469,10 +21469,6 @@
 
 	'use strict';
 
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _react = __webpack_require__(1);
@@ -21495,7 +21491,6 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Include React 
 
-
 	// Here we include all of the sub-components
 
 	// Helper Function
@@ -21505,10 +21500,10 @@
 	var Main = function (_React$Component) {
 		_inherits(Main, _React$Component);
 
-		function Main(props) {
+		function Main() {
 			_classCallCheck(this, Main);
 
-			var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 
 			_this.state = {
 				searchTerm: "",
@@ -21591,8 +21586,6 @@
 					});
 				}
 			}
-			// On load display the number of clicks
-
 		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
@@ -21600,11 +21593,7 @@
 
 				console.log("COMPONENT MOUNTED");
 
-				// The moment the page renders on page load, we will retrieve the previous click count.
-				// We will then utilize that click count to change the value of the click state.
 				_helpers2.default.getHistory().then(function (response) {
-					// Using a ternary operator we can set newClicks to the number of clicks in our response object
-					// If we don't have any clicks in our database, set newClicks to 0
 					_this5.setState({
 						history: response.data
 					});
@@ -21655,7 +21644,7 @@
 		return Main;
 	}(_react2.default.Component);
 
-	exports.default = Main;
+	module.exports = Main;
 
 /***/ },
 /* 179 */
