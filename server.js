@@ -17,7 +17,7 @@ app.use(bodyParser.json({type: "application/vnd.api+json"}));
 
 app.use(express.static("./public"));
 
-mongoose.connect("mongodb:/localhost/NYTReact");
+mongoose.connect("mongodb://localhost/NYTReact");
 
 var db = mongoose.connection;
 
@@ -69,3 +69,5 @@ app.delete("/api/:id", (req, res) => {
     res.send(doc);
   })
 })
+
+app.listen(PORT);

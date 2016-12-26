@@ -21543,8 +21543,8 @@
 				});
 			}
 		}, {
-			key: 'removeButton',
-			value: function removeButton(event) {
+			key: 'deleteButton',
+			value: function deleteButton(event) {
 				var _this3 = this;
 
 				var button = event.currentTarget;

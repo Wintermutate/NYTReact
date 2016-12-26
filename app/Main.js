@@ -2,7 +2,7 @@
 import React from "react";
 
 // Here we include all of the sub-components
-import Form  from './Children/Form';
+import Form from './Children/Form';
 // Helper Function
 import helpers from './utils/helpers.js';
 
@@ -38,7 +38,7 @@ export default class Main extends React.Component{
 		});
 	}
 
-	removeButton(event){
+	deleteButton(event){
 		let button = event.currentTarget;
 		let articleID = button.getAttribute("data-id");
 
