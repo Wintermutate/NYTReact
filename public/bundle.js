@@ -21479,6 +21479,10 @@
 
 	var _Form2 = _interopRequireDefault(_Form);
 
+	var _Results = __webpack_require__(206);
+
+	var _Results2 = _interopRequireDefault(_Results);
+
 	var _helpers = __webpack_require__(180);
 
 	var _helpers2 = _interopRequireDefault(_helpers);
@@ -21509,11 +21513,12 @@
 				searchTerm: "",
 				startYear: 0,
 				endYear: 0,
-				results: "",
+				results: [],
 				history: []
 			};
 			_this.saveButton = _this.saveButton.bind(_this);
 			_this.deleteButton = _this.deleteButton.bind(_this);
+			_this.setTerm = _this.setTerm.bind(_this);
 			return _this;
 		}
 
@@ -21582,6 +21587,8 @@
 							_this4.setState({
 								results: data
 							});
+
+							console.log(_this4.state.results);
 						}
 					});
 				}
@@ -21635,6 +21642,11 @@
 							'div',
 							{ className: 'col-md-6' },
 							_react2.default.createElement(_Form2.default, { setTerm: this.setTerm })
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'col-md-6' },
+							_react2.default.createElement(_Results2.default, { results: this.state.results, onSave: this.saveButton })
 						)
 					)
 				);
@@ -21670,16 +21682,19 @@
 		},
 
 		// This function will respond to the user input 
-		handleChange: function handleChange(key) {
+		handleChange: function handleChange(event) {
 
-			// Here we create syntax to capture any change in text to the query terms (pre-search).
-			// See this Stack Overflow answer for more details: 
-			// http://stackoverflow.com/questions/21029999/react-js-identifying-different-inputs-with-one-onchange-handler
-			return function (event) {
-				var newState = {};
-				newState[key] = event.target.value;
-				undefined.setState(newState);
-			};
+			switch (event.target.id) {
+				case "term":
+					this.setState({ term: event.target.value });
+					break;
+				case "startYear":
+					this.setState({ startYear: event.target.value });
+					break;
+				case "endYear":
+					this.setState({ endYear: event.target.value });
+					break;
+			}
 		},
 
 		// When a user submits... 
@@ -21722,7 +21737,7 @@
 								React.createElement(
 									"strong",
 									null,
-									"Location"
+									"Article Topic"
 								)
 							),
 							React.createElement("input", { type: "text", className: "form-control text-center", value: this.state.term, id: "term", onChange: this.handleChange, required: true }),
@@ -21736,7 +21751,7 @@
 									"Start Year"
 								)
 							),
-							React.createElement("input", { type: "date", className: "form-control text-center", value: this.state.startYear, id: "startYear", onChange: this.handleChange, required: true }),
+							React.createElement("input", { type: "text", className: "form-control text-center", value: this.state.startYear, id: "startYear", onChange: this.handleChange, required: true }),
 							React.createElement("br", null),
 							React.createElement(
 								"h4",
@@ -21747,7 +21762,7 @@
 									"End Year"
 								)
 							),
-							React.createElement("input", { type: "date", className: "form-control text-center", value: this.state.endYear, id: "endYear", onChange: this.handleChange, required: true }),
+							React.createElement("input", { type: "text", className: "form-control text-center", value: this.state.endYear, id: "endYear", onChange: this.handleChange, required: true }),
 							React.createElement("br", null),
 							React.createElement(
 								"button",
@@ -21785,7 +21800,7 @@
 	    console.log(location);
 
 	    // Figure out the geolocation
-	    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + NYTAPI + "&q=" + searchTerm + "&begin_date=" + startYear + "0101" + "&end_date=" + endYear + "0101";
+	    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + apiKey + "&q=" + searchTerm + "&begin_date=" + startYear + "0101" + "&end_date=" + endYear + "0101";
 	    return axios.get(queryURL).then(function (response) {
 	      // If get get a result, return that result's formatted address property
 	      if (response.data.response.docs[0]) {
@@ -23302,6 +23317,75 @@
 	  };
 	};
 
+
+/***/ },
+/* 206 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	// Include React 
+	var React = __webpack_require__(1);
+
+	// Component creation
+	var Results = React.createClass({
+		displayName: "Results",
+
+		renderData: function renderData(resultsArray) {
+			console.log(resultsArray);
+			return resultsArray.map(function (arrayCell, index) {
+				return React.createElement(
+					"li",
+					{ key: index },
+					React.createElement(
+						"a",
+						{ href: arrayCell.web_url, target: "_blank" },
+						arrayCell.headline.main
+					),
+					React.createElement(
+						"button",
+						{ onCLick: undefined.props.onSave, className: "save btn btn-primary", "data-title": arrayCell.headline.main, "data-date": arrayCell.pub_date, "data-url": arrayCell.web_url },
+						"Save"
+					)
+				);
+			});
+		},
+
+		// Here we render the function
+		render: function render() {
+
+			return React.createElement(
+				"div",
+				{ className: "panel panel-default" },
+				React.createElement(
+					"div",
+					{ className: "panel-heading" },
+					React.createElement(
+						"h3",
+						{ className: "panel-title text-center" },
+						"Results"
+					)
+				),
+				React.createElement(
+					"div",
+					{ className: "panel-body text-center" },
+					React.createElement(
+						"h1",
+						null,
+						"Results"
+					),
+					React.createElement(
+						"ul",
+						null,
+						this.renderData(this.props.results)
+					)
+				)
+			);
+		}
+	});
+
+	// Export the component back for use in other files
+	module.exports = Results;
 
 /***/ }
 /******/ ]);

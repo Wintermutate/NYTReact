@@ -2,6 +2,7 @@
 import React from "react";
 // Here we include all of the sub-components
 import Form from './Children/Form';
+import Results from './Children/Results';
 // Helper Function
 import helpers from './utils/helpers.js';
 
@@ -13,11 +14,12 @@ class Main extends React.Component{
 			searchTerm: "",
 			startYear: 0,
 			endYear: 0,
-			results: "",
+			results: [],
 			history:[]
 		}
 		this.saveButton = this.saveButton.bind(this);
 		this.deleteButton = this.deleteButton.bind(this);
+		this.setTerm = this.setTerm.bind(this);
 	}
 
 	saveButton(event){
@@ -72,7 +74,9 @@ class Main extends React.Component{
 
 						this.setState({
 							results: data
-						})		
+						})
+
+						console.log(this.state.results);		
 					}
 
 				});		
@@ -109,6 +113,11 @@ class Main extends React.Component{
 					<div className="col-md-6">
 					
 						<Form setTerm={this.setTerm}/>
+
+					</div>
+					<div className="col-md-6">
+					
+						<Results results={this.state.results} onSave={this.saveButton}/>
 
 					</div>
 
