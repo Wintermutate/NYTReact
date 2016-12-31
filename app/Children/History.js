@@ -2,17 +2,14 @@
 var React = require('react');
 
 // Component creation
-var History = React.createClass({
+class History extends React.Component{
 
-	renderData: function(historyArray){
+	renderData(historyArray){
 		console.log(historyArray);
-		return historyArray.map(function(arrayCell){
-			return (<p>{arrayCell.location + " " + arrayCell.findDate}</p>)
-		})
-	},
+	}
 
 	// Here we render the function
-	render: function(){
+	render(){
 
 		return(
 
@@ -29,7 +26,7 @@ var History = React.createClass({
 
 		)
 	}
-});
+};
 
 // Export the component back for use in other files
 module.exports = History;

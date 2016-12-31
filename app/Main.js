@@ -3,6 +3,7 @@ import React from "react";
 // Here we include all of the sub-components
 import Form from './Children/Form';
 import Results from './Children/Results';
+import History from './Children/History';
 // Helper Function
 import helpers from './utils/helpers.js';
 
@@ -30,7 +31,7 @@ class Main extends React.Component{
 
 		let article = {title, date, url};
 
-		helpers.postHistory({article:article}),then(()=>{
+		helpers.postHistory({article:article}).then(()=>{
 			helpers.getHistory().then((response)=>{
 				this.setState({
 					history: response.data
@@ -120,7 +121,11 @@ class Main extends React.Component{
 						<Results results={this.state.results} onSave={this.saveButton}/>
 
 					</div>
+					<div className="col-md-12">
 
+						<History results={this.state.history}/>
+
+					</div>
 				</div>
 
 			</div>
