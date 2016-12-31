@@ -35,7 +35,7 @@ app.get("/", (req, res) => {
 
 app.get("/api", (req, res) => {
 
-	Article.find({}).sort(["date", "descending"]).limit(5).exec((err, doc) => {
+	Article.find({}).limit(10).exec((err, doc) => {
 		if(err){
 			throw err;
 			console.log(err);

@@ -30,8 +30,8 @@ var helper = {
   },
 
   // This function posts new searches to our database.
-  postHistory: function(article) {
-    return axios.post("/api", { article: article });
+  postHistory: function(title, date, url) {
+    return axios.post("/api", { title: title, date:date, url:url });
   },
 
   deleteHistory: function(articleID){

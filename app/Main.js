@@ -29,9 +29,8 @@ class Main extends React.Component{
 		let date = button.getAttribute("data-date");
 		let url = button.getAttribute("data-url");
 
-		let article = {title, date, url};
 
-		helpers.postHistory({article:article}).then(()=>{
+		helpers.postHistory(title,date,url).then(()=>{
 			helpers.getHistory().then((response)=>{
 				this.setState({
 					history: response.data
@@ -44,7 +43,7 @@ class Main extends React.Component{
 		let button = event.currentTarget;
 		let articleID = button.getAttribute("data-id");
 
-		helpers.deleteHistory({articleID:articleID}).then(()=>{
+		helpers.deleteHistory(articleID).then(()=>{
 			helpers.getHistory().then((response)=>{
 				this.setState({
 					history: response.data
@@ -123,7 +122,7 @@ class Main extends React.Component{
 					</div>
 					<div className="col-md-12">
 
-						<History results={this.state.history}/>
+						<History results={this.state.history} onRemove={this.deleteButton}/>
 
 					</div>
 				</div>
