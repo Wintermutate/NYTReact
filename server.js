@@ -52,7 +52,7 @@ app.post("/api", (req, res) => {
 
 	var article = {title, date, url};
 
-	Article.update({$and: [{title: title}, {url: url}]},{$setOnInsert: [{title:title}, {date:date}, {url: url}]}, {upsert: true}, (err, doc) => {
+	Article.update({$and: [{title: title}, {url: url}]},{$setOnInsert: {title:title, date:date, url: url}}, {upsert: true}, (err, doc) => {
     if(err){
     	throw err;
     	console.log(err);

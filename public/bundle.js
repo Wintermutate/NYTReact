@@ -21536,7 +21536,7 @@
 				var date = button.getAttribute("data-date");
 				var url = button.getAttribute("data-url");
 
-				_helpers2.default.postHistory({ title: title, date: date, url: url }).then(function () {
+				_helpers2.default.postHistory(title, date, url).then(function () {
 					_helpers2.default.getHistory().then(function (response) {
 						_this2.setState({
 							history: response.data
