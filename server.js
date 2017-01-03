@@ -46,13 +46,13 @@ app.get("/api", (req, res) => {
 });
 
 app.post("/api", (req, res) => {
-	let title = req.body.title;
-	let url = req.body.url;
-	let date = req.body.date;
+	var title = req.body.title;
+	var url = req.body.url;
+	var date = req.body.date;
 
-	let article = {title, date, url};
+	var article = {title, date, url};
 
-	Article.update({$and: [{title: title}, {url: url}]},{$setOnInsert: article}, {upsert: true}, (err, doc) => {
+	Article.update({$and: [{title: title}, {url: url}]},{$setOnInsert: [{title:title}, {date:date}, {url: url}]}, {upsert: true}, (err, doc) => {
     if(err){
     	throw err;
     	console.log(err);

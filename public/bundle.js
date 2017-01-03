@@ -21536,7 +21536,7 @@
 				var date = button.getAttribute("data-date");
 				var url = button.getAttribute("data-url");
 
-				_helpers2.default.postHistory(title, date, url).then(function () {
+				_helpers2.default.postHistory({ title: title, date: date, url: url }).then(function () {
 					_helpers2.default.getHistory().then(function (response) {
 						_this2.setState({
 							history: response.data
@@ -21830,11 +21830,11 @@
 						React.createElement(
 							"a",
 							{ href: arrayCell.web_url, target: "_blank" },
-							arrayCell.headline.main
+							arrayCell.headline.main.toString()
 						),
 						React.createElement(
 							"button",
-							{ onClick: _this2.props.onSave, className: "save btn btn-primary", "data-title": arrayCell.headline.main, "data-date": arrayCell.pub_date, "data-url": arrayCell.web_url },
+							{ onClick: _this2.props.onSave, className: "save btn btn-primary", "data-title": arrayCell.headline.main.toString(), "data-date": arrayCell.pub_date, "data-url": arrayCell.web_url },
 							"Save"
 						)
 					);

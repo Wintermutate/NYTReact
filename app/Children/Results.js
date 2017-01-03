@@ -12,8 +12,8 @@ class Results extends React.Component{
 		return resultsArray.map((arrayCell, index)=>{
 			return (
 				<li key={index}>
-				<a href={arrayCell.web_url} target="_blank">{arrayCell.headline.main}</a>
-				<button onClick={this.props.onSave} className="save btn btn-primary" data-title={arrayCell.headline.main} data-date={arrayCell.pub_date} data-url={arrayCell.web_url}>Save</button>
+				<a href={arrayCell.web_url} target="_blank">{arrayCell.headline.main.toString()}</a>
+				<button onClick={this.props.onSave} className="save btn btn-primary" data-title={arrayCell.headline.main.toString()} data-date={arrayCell.pub_date} data-url={arrayCell.web_url}>Save</button>
 				</li>
 			)
 		});

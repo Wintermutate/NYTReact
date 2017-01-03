@@ -30,7 +30,7 @@ class Main extends React.Component{
 		let url = button.getAttribute("data-url");
 
 
-		helpers.postHistory(title,date,url).then(()=>{
+		helpers.postHistory({title:title,date:date,url:url}).then(()=>{
 			helpers.getHistory().then((response)=>{
 				this.setState({
 					history: response.data
